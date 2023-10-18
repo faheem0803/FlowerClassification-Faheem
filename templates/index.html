@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>login form</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body>
+   
+<div class="form-container">
+
+   <form action="/login" method="POST" autocomplete="off"> 
+        <h3>Login</h3>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category,message in messages %}
+        <div class="alert alert-{{category}}">{{message}}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <input type="text" name="name" required placeholder="Name">
+        <input type="password" name="password" required placeholder="enter your password">
+        <input type="submit" name="submit" value="login now" class="form-btn">
+        <p>don't have an account? <a href="{{url_for('register')}}">register now</a></p>
+   </form>
+
+</div>
+
+</body>
+</html>

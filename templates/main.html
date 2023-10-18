@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flower Image Classification</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='myfont/css/all.min.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-decoration: none;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background: #eee;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .container h3 {
+            font-size: 30px;
+            color: #333;
+        }
+
+        .container h3 span {
+            background: crimson;
+            color: #fff;
+            border-radius: 5px;
+            padding: 0 15px;
+        }
+
+        .container h1 {
+            font-size: 50px;
+            color: #333;
+        }
+
+        .container h1 span {
+            color: crimson;
+        }
+
+        .container p {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .container .btn {
+            display: inline-block;
+            padding: 10px 30px;
+            font-size: 20px;
+            background: #333;
+            color: #fff;
+            margin: 0 5px;
+            text-transform: capitalize;
+        }
+
+        .container .btn:hover {
+            background: crimson;
+        }
+
+        .form-container {
+            text-align: center;
+        }
+
+        .form-container form {
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+            background: #fff;
+            text-align: center;
+            width: 500px;
+        }
+
+        .form-container form h3 {
+            font-size: 30px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .form-container form input,
+        .form-container form select {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 17px;
+            margin: 8px 0;
+            background: #eee;
+            border-radius: 5px;
+        }
+
+        .form-container form select option {
+            background: #fff;
+        }
+
+        .form-container form .form-btn {
+            background: #fbd0d9;
+            color: crimson;
+            text-transform: capitalize;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .form-container form .form-btn:hover {
+            background: crimson;
+            color: #fff;
+        }
+
+        .form-container form p {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .form-container form p a {
+            color: crimson;
+        }
+
+        .form-container form .error-msg {
+            margin: 10px 0;
+            display: block;
+            background: crimson;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 20px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>
+            Flower Image Classification
+            <span>Updated</span>
+        </h3>
+        <h1>
+            Welcome : {{session["name"]}}
+            <span>!</span>
+        </h1>
+        <a href="{{url_for('logout')}}" class="btn">Logout</a>
+    </div>
+    <div class="form-container">
+        <form action="/classify" method="post" enctype="multipart/form-data">
+            <h3>Image Classification Form</h3>
+            <input type="file" name="image">
+            <input type="submit" class="form-btn" value="Classify">
+        </form>
+    </div>
+    <br>
+    {% if image_path %}
+        <h2>Selected Image:</h2>
+        <img src="{{ image_path }}" width="300">
+        <h2>Prediction:</h2>
+        <p>{{ prediction }}</p>
+    {% endif %}
+</body>
+</html>
+
